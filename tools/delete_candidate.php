@@ -122,7 +122,7 @@ function showHelp()
     die();
 }
 
-function deleteCandidate($CandID, $PSCID, $confirm, $printToSQL, $DB, $output)
+function deleteCandidate($CandID, $PSCID, $confirm, $printToSQL, $DB, &$output)
 {
 
     //Find candidate...
@@ -142,12 +142,22 @@ function deleteCandidate($CandID, $PSCID, $confirm, $printToSQL, $DB, $output)
     if (is_null($sessions) || empty($sessions)) {
         echo "There are no corresponding sessions for CandID: $CandID \n";
     } else {
+        if ($outputType = "tosql") {
+            $subOutputType = "";
+        } else {
+            $subOutputType = $outputType;
+        }
         foreach ($sessions as $sid) {
             $out = shell_exec(
                 "php ".__DIR__."/delete_timepoint.php delete_timepoint".
-                " $CandID $PSCID $sid $outputType"
+                " $CandID $PSCID $sid $subOutputType"
             );
             echo $out;
+            $match = Array();
+            $nbDelete = preg_match_all("/(DELETE FROM .*;)/", $out, $match);
+            if ($nbDelete > 0) {
+                $output .= $match[1];
+            }
         }
     }
 
