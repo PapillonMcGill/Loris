@@ -275,6 +275,7 @@ function deleteTimepoint($CandID, $sessionID, $confirm, $printToSQL, $DB, $outpu
         if ($printToSQL) {
             _exportSQL($output, $CandID, $sessionID);
         } else {
+            echo $output;
             return $output;
         }
     }

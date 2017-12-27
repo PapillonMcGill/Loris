@@ -152,11 +152,14 @@ function deleteCandidate($CandID, $PSCID, $confirm, $printToSQL, $DB, &$output)
                 "php ".__DIR__."/delete_timepoint.php delete_timepoint".
                 " $CandID $PSCID $sid $subOutputType"
             );
-            echo $out;
+            //echo $out;
             $match = Array();
             $nbDelete = preg_match_all("/(DELETE FROM .*;)/", $out, $match);
             if ($nbDelete > 0) {
-                $output .= $match[1];
+                for ($i=0; $i < $nbDelete; $i++) {
+                    $output .= $match[0][$i];
+                    $output .= "\n";
+                }
             }
         }
     }
