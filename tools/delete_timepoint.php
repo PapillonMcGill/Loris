@@ -114,7 +114,7 @@ if ($sessionID != null) {
  */
 switch ($action) {
 case 'delete_timepoint':
-    deleteTimepoint($CandID, $sessionID, $confirm, $printToSQL, $DB, $output);
+    return deleteTimepoint($CandID, $sessionID, $confirm, $printToSQL, $DB, $output);
     break;
 }
 
@@ -240,7 +240,7 @@ function deleteTimepoint($CandID, $sessionID, $confirm, $printToSQL, $DB, $outpu
         // Delete from session
         echo "\n-- Deleting from session.\n";
         $DB->delete('session', array('ID' => $sessionID));
-    } elseif ($printToSQL) {
+    } else {
         // Delete each instrument instance
         foreach ($instruments as $instrument) {
             $name    = implode(" -> ", $instrument);
@@ -272,7 +272,12 @@ function deleteTimepoint($CandID, $sessionID, $confirm, $printToSQL, $DB, $outpu
         $output .= "\n-- Deleting from session.\n";
         _printResultsSQL('session', array('ID' => $sessionID), $output, $DB);
         
-        _exportSQL($output, $CandID, $sessionID);
+        if ($printToSQL) {
+            _exportSQL($output, $CandID, $sessionID);
+        } else {
+            echo $output;
+            return $output;
+        }
     }
 }
 
