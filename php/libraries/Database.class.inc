@@ -978,7 +978,9 @@ class Database
         }
 
         foreach ($dataArray as $key => $item ) {
-            if ($item===null || $item==='') {
+            if ($item===null ) {
+                $output[] = "`$key` IS NULL";
+            } elseif ( $item==='') {
                 $output[] = "`$key`=NULL";
             } else {
                 $item     = $this->quote($item);
