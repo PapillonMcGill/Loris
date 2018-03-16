@@ -244,6 +244,8 @@ class My_Preferences extends \NDB_Form
     {
         parent::setup();
 
+        $DB =& \Database::singleton();
+
         $this->identifier = $_SESSION['State']->getUsername();
 
         $user =& \User::singleton($this->identifier);
@@ -302,7 +304,7 @@ class My_Preferences extends \NDB_Form
 
         // email address rules
         $this->addRule('Email', 'Email address is required', 'required');
-        $this->addRule('Email', 'Your email address must be valid', 'email');
+        this->addRule('Email', 'Your email address must be valid', 'email');
         $this->addRule(
             'Email',
             'Your email address must be less than 255 characters long',
