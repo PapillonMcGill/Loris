@@ -139,7 +139,7 @@ function showHelp()
  * All other tables with FOREIGN KEY relations to these tables (second-level relations) should
  * have actions on delete specified in the database schema
  */
-function deleteCandidate($CandID, $PSCID, $confirm, $printToSQL, $DB, $output)
+function deleteCandidate($CandID, $PSCID, $confirm, $printToSQL, $DB, &$output)
 {
 
     //Find candidate...
@@ -159,7 +159,8 @@ function deleteCandidate($CandID, $PSCID, $confirm, $printToSQL, $DB, $output)
     if (is_null($sessions) || empty($sessions)) {
         echo "There are no corresponding sessions for CandID: $CandID \n";
     } else {
-        if ($outputType = "tosql") {
+        $subOutputType = "";
+        if ($outputType == "tosql") {
             $subOutputType = "";
         } else {
             $subOutputType = $outputType;
