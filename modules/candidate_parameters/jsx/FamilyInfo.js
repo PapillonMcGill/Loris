@@ -74,9 +74,26 @@ var FamilyInfo = React.createClass({
     }
 
     var relationshipOptions = {
-      "full_sibling": "Full Sibling",
-      "half_sibling": "Half Sibling",
-      "1st_cousin": "First Cousin"
+        "mother": "mother",
+        "father": "father",
+        "brother": "brother",
+        "sister": "sister",
+        "maternal_grandmother": "maternal grandmother",
+        "maternal_grandfather": "maternal grandfather",
+        "paternal_grandmother": "paternal grandmother",
+        "paternal_grandfather": "paternal grandfather",
+        "maternal_great_grandmother": "maternal great grandmother",
+        "maternal_great_grandfather": "maternal great grandfather",
+        "paternal_great_grandmother": "paternal great grandmother",
+        "paternal_great_grandfather": "paternal great grandfather",
+        "aunt": "aunt",
+        "uncle": "uncle",
+        "great_aunt": "great aunt",
+        "great_uncle": "great uncle",
+        "maternal_cousin": "maternal cousin",
+        "paternal_cousin": "paternal cousin",
+        "adoptive_mother": "adoptive mother",
+        "adoptive_father": "adoptive father"
     };
 
     var disabled = true;
